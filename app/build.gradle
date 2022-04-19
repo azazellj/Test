@@ -84,6 +84,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
 
     // To use Kotlin annotation processing tool (kapt)

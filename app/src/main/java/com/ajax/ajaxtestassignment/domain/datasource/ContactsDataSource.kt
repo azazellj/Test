@@ -37,9 +37,16 @@ internal class ContactsDataSourceImpl(
     }
 
     override suspend fun loadContacts(page: Int, results: Int): List<Contact> {
-        return api.getContacts(page, results).results.orEmpty().map {
-            it.toDomain()
+        val url = "https://wm0.mobimate.com/content/worldmate/currencies/currency2008.dat"
+
+        return api.getContacts(url)
+//            .execute().body()?.string()
+            .orEmpty().split("\n").map {
+            Contact(id = it, firstName = it, lastName = it, email = it, picture = it)
         }
+//        return api.getContacts(page, results).results.orEmpty().map {
+//            it.toDomain()
+//        }
     }
 
     override suspend fun saveContacts(contacts: List<Contact>, isRefresh: Boolean) {

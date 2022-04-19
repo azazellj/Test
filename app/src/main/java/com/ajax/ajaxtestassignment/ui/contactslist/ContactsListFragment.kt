@@ -1,13 +1,16 @@
 package com.ajax.ajaxtestassignment.ui.contactslist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ajax.ajaxtestassignment.databinding.FragmentContactsListBinding
 import com.ajax.ajaxtestassignment.di.GlobalFactory
@@ -42,6 +45,14 @@ open class ContactsListFragment : Fragment() {
             .apply {
                 contactList.layoutManager = LinearLayoutManager(context)
                 contactList.adapter = contactAdapter
+
+                refreshBtn.setOnClickListener {
+                    contactAdapter.refresh()
+                }
+
+                contactAdapter.loadStateFlow.onEach {
+                    progressBar.isVisible = it.refresh == LoadState.Loading || it.append == LoadState.Loading
+                }.launchIn(lifecycleScope)
             }
             .also {
                 binding = it

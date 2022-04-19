@@ -7,9 +7,11 @@ import java.util.*
 
 fun ApiContact.toDomain(): Contact {
     return Contact(
-        id = (name?.firstName.orEmpty() + name?.lastName.orEmpty()).ifEmpty {
+        id =
+//        (name?.firstName.orEmpty() + name?.lastName.orEmpty()).ifEmpty {
             UUID.randomUUID().toString()
-        },
+//        }
+,
         firstName = name?.firstName,
         lastName = name?.lastName,
         email = email,

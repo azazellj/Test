@@ -4,6 +4,7 @@ import com.ajax.ajaxtestassignment.api.contacts.ContactsService
 import com.squareup.moshi.Moshi
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 class RetrofitServicesProvider {
     private val moshi: Moshi = Moshi.Builder()
@@ -11,7 +12,7 @@ class RetrofitServicesProvider {
 
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl("https://randomuser.me/")
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addConverterFactory(ScalarsConverterFactory.create())
         .build()
 
     val contactsService: ContactsService
